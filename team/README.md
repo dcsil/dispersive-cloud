@@ -1,5 +1,4 @@
 People at COMPANY NAME
 ---
 
-- [Jane Doe, Engineering](./jane_doe.md)
-- ...
+- [Tingxin Xie, Project developer and business analyst](./Tingxin_Xie.md)
