@@ -1,29 +1,28 @@
 # Roadmap
+For our MVP, we will be focusing on creating behavior biometric services on Amazon Web Services. Therefore, our product roadmap will largely be influenced by Amazon Web Services. Based on our product features, the process is as follows:
 
-This describes our plans...
-
-- Setup a roadmap for at least the duration of this course. You may go longer to indicate long term goals. The roadmap can include as much detail as you want with the following conditions:
-    - Must include your immediate next steps
-    - Must include plans to perform user research
-    - Must include low-fidelity plans for a launch date
-    - You fill in the gaps. Be careful not to go too detailed as we have limited knowledge still.
+1. We must first deploy our website on AWS Amplify, Amazon DynamoDB, and AWS Lambda.
+2. The next step is to build the ML model for mouse movement behavior biometric detection with AWS Lambda and setup monitorization feature for mouse movement by HTML and JavaScript.
+3. Our services can extend from mouse movement to gesture and eye movements for Tablet and VR environments.
 
 ## Short Term
 
-**Duration:** Q3 2019
+**Duration:** rom September 2020 to November 2020
 
-We intend to ship X, Y, Z - list tracking issues that encompass all details.
+We intend to deploy our website on AWS Amplify, Amazon DynamoDB, and AWS Lambda.
 
 ## Medium Term
 
-**Duration:** Q4 2019
+**Duration:** from November 2020 to December 2020
 
-We intend to... medium-level of detail plans.
+We intend to build the ML model for mouse movement behavior biometric detection with AWS Lambda and setup monitorization feature for mouse movement by HTML and JavaScrip.
 
 We plan to launch a barebones alpha version in the medium term.
 
 ## Long Term
 
-**Duration:** 2020
+**Duration:** from December 2020 to future
 
-We intend to... high level plans
+We intend to extend from mouse movement to gesture and eye movements for Tablet and VR environments.
+
+![roadmap](./dispersive_cloud_roadmap.png)
