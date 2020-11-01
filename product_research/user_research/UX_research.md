@@ -62,7 +62,7 @@ Participants in our usability test have completed tasks smoothly and left very c
 - To identify real alert and false alert in the record
 
 ### Update employee account features
-- Need to have a clear chart in the main interface
+- Need to have a clear icon in the main interface
 - The reliability of building the model after 10 operations is low, and 100 operations (the number of operations in a working day) can be used to build a user model profile
 - Corresponding prompt after successful addition
 
