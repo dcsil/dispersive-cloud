@@ -18,16 +18,16 @@ Based on the professional property of our target user tier1 analyst, we can effe
 
 #### Overview of people interviewed
 
-### Mr. C
-## Background
+Mr. C
+- Background
 a RBC Data Science Team Sr Manager
-## Matched channel
+- Matched channel
 RBC partnership
 
-### Mr. R
-## Background
+Mr. R
+- Background
 a Tier 1 Security analyst
-## Matched channel
+- Matched channel
 LinkedIn
 
 ### Conduct usability testing on the set of test users
