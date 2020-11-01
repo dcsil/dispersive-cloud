@@ -7,4 +7,4 @@ Table of Contents
 ---
 
 - [Roadmap](./roadmap.md)
-- [User research](./ux_research.md)
+- [User research](./user_research/ux_research.md)
