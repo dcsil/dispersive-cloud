@@ -19,16 +19,12 @@ Based on the professional property of our target user tier1 analyst, we can effe
 #### Overview of people interviewed
 
 Mr. C
-- Background
-a RBC Data Science Team Sr Manager
-- Matched channel
-RBC partnership
+- Background: a RBC Data Science Team Sr Manager
+- Matched channel: RBC partnership
 
 Mr. R
-- Background
-a Tier 1 Security analyst
-- Matched channel
-LinkedIn
+- Background: a Tier 1 Security analyst
+- Matched channel: LinkedIn
 
 ### Conduct usability testing on the set of test users
 The process of our user usability test is:
