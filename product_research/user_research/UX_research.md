@@ -64,7 +64,7 @@ Participants in our usability test have completed tasks smoothly and left very c
 ### Update employee account features
 - Need to have a clear chart in the main interface
 - The reliability of building the model after 10 operations is low, and 100 operations (the number of operations in a working day) can be used to build a user model profile
--Corresponding prompt after successful addition
+- Corresponding prompt after successful addition
 
 ## Build Plan
 We have updated our roadmap based on the feedback we received from the user testing.
