@@ -1,0 +1,21 @@
+tools:
+  exceptions:
+    - webpage: https://ca-central-1.console.aws.amazon.com/amplify/home?region=ca-central-1&code=5b34414c70a0da6eee90#/d1dupx5j9nn1h7
+    - lambda: https://ca-central-1.console.aws.amazon.com/cloudwatch/home?region=ca-central-1#
+  logging:
+    - webpage: https://console.aws.amazon.com/PATH/history?region=a-central-1
+    - lambda: https://console.aws.amazon.com/PATH/home?region=a-central-1#logs
+  ci: https://ca-central-1.console.aws.amazon.com/codesuite/codepipeline/pipelines?region=ca-central-1
+
+ services:
+   production: https://ca-central-1.console.aws.amazon.com/amplify/home?region=ca-central-1&code=5b34414c70a0da6eee90#/d1dupx5j9nn1h7
+   staging: https://master.d1dupx5j9nn1h7.amplifyapp.com/ 
+
+ docs:
+   getting_started: ./README.md
+      
+ commands:
+   bootstrap: script/bootstrap
+   database: https://ca-central-1.console.aws.amazon.com/dynamodb/home?region=ca-central-1#
+   server: https://ca-central-1.console.aws.amazon.com/apigateway/main/apis?region=ca-central-1
+
