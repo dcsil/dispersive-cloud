@@ -28,11 +28,11 @@ Mr. R
 
 ### Conduct usability testing on the set of test users
 The process of our user usability test is:
-	1. Inform participants that the testing process will be recorded throughout
-	2. Remind participants to think aloud every step of the way during the participation process
-	3. Give participants a list of tasks to complete the low-fidelity prototype of Dispersive Cloud
-	4. Record participants' performance and feedback during task execution
-	5. Finish the test through a series of general feedback questions
+1. Inform participants that the testing process will be recorded throughout
+2. Remind participants to think aloud every step of the way during the participation process
+3. Give participants a list of tasks to complete the low-fidelity prototype of Dispersive Cloud
+4. Record participants' performance and feedback during task execution
+5. Finish the test through a series of general feedback questions
 
 #### A list of tasks 
 
