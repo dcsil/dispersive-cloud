@@ -18,4 +18,4 @@ tools:
    bootstrap: script/bootstrap
    database: https://ca-central-1.console.aws.amazon.com/dynamodb/home?region=ca-central-1#
    server: https://ca-central-1.console.aws.amazon.com/apigateway/main/apis?region=ca-central-1
-
+   test: pip install pytest pytest-mock --user && export PYTHONPATH=app/lambda/:$PYTHONPATH && python -m pytest app/lambda/tests/ -v
