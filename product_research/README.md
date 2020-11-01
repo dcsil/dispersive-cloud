@@ -6,5 +6,5 @@ This folder contains content and research about our product, including market re
 Table of Contents
 ---
 
-- [Market](./market.md)
 - [Roadmap](./roadmap.md)
+- [User research](./ux_research.md)
