@@ -1,21 +1,20 @@
 tools:
   exceptions:
-    - webpage: https://ca-central-1.console.aws.amazon.com/amplify/home?region=ca-central-1&code=5b34414c70a0da6eee90#/d1dupx5j9nn1h7
-    - lambda: https://ca-central-1.console.aws.amazon.com/cloudwatch/home?region=ca-central-1#
+    - webpage: https://ca-central-1.console.aws.amazon.com/amplify/home?region=ca-central-1#/d2lhxpldmfgt05
+    - lambda: https://ca-central-1.console.aws.amazon.com/lambda/home?region=ca-central-1#/functions/aws-app-getAllItemsFunction-D59CGD8XDLN?tab=configuration
+    - database: https://ca-central-1.console.aws.amazon.com/dynamodb/home?region=ca-central-1#tables:selected=aws-app-SampleTable-1L8N9XTLLXIRZ;tab=overview
   logging:
-    - webpage: https://console.aws.amazon.com/PATH/history?region=a-central-1
-    - lambda: https://console.aws.amazon.com/PATH/home?region=a-central-1#logs
-  ci: https://ca-central-1.console.aws.amazon.com/codesuite/codepipeline/pipelines?region=ca-central-1
+    - webpage: https://ca-central-1.console.aws.amazon.com/amplify/home?region=ca-central-1#/d2lhxpldmfgt05/settings/accesslogs
+    - lambda: https://ca-central-1.console.aws.amazon.com/lambda/home?region=ca-central-1#/functions/aws-app-getAllItemsFunction-D59CGD8XDLN?tab=monitoring
+  ci: https://ca-central-1.console.aws.amazon.com/codesuite/codepipeline/pipelines/aws-app-cicd-PipelineC660917D-1KE18UCIKNGUS/view?region=ca-central-1
+  services:
+    - production:  https://126fo652li.execute-api.ca-central-1.amazonaws.com/Prod
+    - stage:  https://126fo652li.execute-api.ca-central-1.amazonaws.com/Stage
 
- services:
-   production: https://ca-central-1.console.aws.amazon.com/amplify/home?region=ca-central-1&code=5b34414c70a0da6eee90#/d1dupx5j9nn1h7
-   staging: https://master.d1dupx5j9nn1h7.amplifyapp.com/ 
-
- docs:
-   getting_started: ./README.md
+  docs:
+   - getting_started: ./README.md
       
- commands:
-   bootstrap: script/bootstrap
-   database: https://ca-central-1.console.aws.amazon.com/dynamodb/home?region=ca-central-1#
-   server: https://ca-central-1.console.aws.amazon.com/apigateway/main/apis?region=ca-central-1
-   test: pip install pytest pytest-mock --user && export PYTHONPATH=app/lambda/:$PYTHONPATH && python -m pytest app/lambda/tests/ -v
+  commands: 
+   - bootstrap: script/bootstrap
+   - server: npm start
+   - test: npm run test

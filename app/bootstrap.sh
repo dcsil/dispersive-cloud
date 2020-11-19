@@ -1,96 +1,92 @@
-#!/usr/bin/env bash
+#!/bin/bash
 
-install_pip3() {
-  echo "Installing pip3"
-  sudo apt-get update
-  sudo apt-get install -y python3-pip
-  PYTHONLOCATION=$(python3 -m site --user-base)
-  echo "export PATH=$PYTHONLOCATION/bin:$PATH" >> ~/.profile
-  source ~/.profile
+# Cloud9 Bootstrap Script
+#
+# 1. Installs homebrew
+# 2. Upgrades to latest AWS CLI
+# 3. Upgrades AWS SAM CLI
+#
+# Usually takes about 8 minutes to complete
+
+set -euxo pipefail
+
+ACCOUNT_ID=$(aws sts get-caller-identity --query 'Account' --output text)
+CURRENT_REGION=$(curl -s http://169.254.169.254/latest/meta-data/placement/availability-zone | sed 's/\(.*\)[a-z]/\1/')
+RED='\033[0;31m'
+YELLOW='\033[1;33m'
+NC='\033[0m'
+
+export INFOPATH="/home/linuxbrew/.linuxbrew/share/info"
+
+function _logger() {
+    echo -e "$(date) ${YELLOW}[*] $@ ${NC}"
 }
 
-install_homebrew() {
-  if [ "$(uname)" == "Darwin" ]; then
-    echo "Installing Homebrew"
-    /usr/bin/ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
-  fi
-}
+function upgrade_sam_cli() {
+    _logger "[+] Backing up current SAM CLI"
+    cp $(which sam) ~/.sam_old_backup
 
-install_docker() {
-  echo "Installing Docker CE"
-  if [ "$(uname)" == "Darwin" ]; then
-    brew install docker docker-compose docker-machine xhyve docker-machine-driver-xhyve
-    sudo chown root:wheel $(brew --prefix)/opt/docker-machine-driver-xhyve/bin/docker-machine-driver-xhyve
-    sudo chmod u+s $(brew --prefix)/opt/docker-machine-driver-xhyve/bin/docker-machine-driver-xhyve
-    docker-machine create default --driver xhyve --xhyve-experimental-nfs-share
-    eval $(docker-machine env default)
-  else
-    echo "Setting up Docker Registry"
-    sudo apt-get update
-    sudo apt-get install apt-transport-https ca-certificates curl software-properties-common -y
-    curl -fsSL https://download.docker.com/linux/ubuntu/gpg | sudo apt-key add -
-    sudo add-apt-repository "deb [arch=amd64] https://download.docker.com/linux/ubuntu $(lsb_release -cs) stable"
-    echo "Installing Docker CE"
-    sudo apt-get update
-    sudo apt-get install docker-ce -y
-  fi
-}
-
-install_aws_cli() {
-  echo "Installing AWS CLI"
-  if [ "$(uname)" == "Darwin" ]; then
-    curl "https://awscli.amazonaws.com/AWSCLIV2.pkg" -o "AWSCLIV2.pkg"
-    sudo installer -pkg AWSCLIV2.pkg -target /
-  else
-    sudo apt-get update
-    sudo apt-get install unzip
-    curl "https://awscli.amazonaws.com/awscli-exe-linux-x86_64.zip" -o "awscliv2.zip"
-    unzip awscliv2.zip
-    sudo ./aws/install
-  fi
-}
-
-install_sam_cli() {
-  echo "Installing SAM CLI"
-  if [ "$(uname)" == "Darwin" ]; then
+    _logger "[+] Installing latest SAM CLI"
+    # pipx install aws-sam-cli
+    # cfn-lint currently clashing with SAM CLI deps
+    ## installing SAM CLI via brew instead
     brew tap aws/tap
     brew install aws-sam-cli
-  else
-    pip3 install aws-sam-cli
-  fi
+
+    _logger "[+] Updating Cloud9 SAM binary"
+    # Allows for local invoke within IDE (except debug run)
+    ln -sf $(which sam) ~/.c9/bin/sam
 }
 
-command -v pip3 > /dev/null 2>&1
-if [ $? -eq 0 ]; then
-  echo "pip3 already installed"
-else
-  install_pip3
-fi
+function upgrade_existing_packages() {
+    _logger "[+] Upgrading system packages"
+    if [[ $(command -v apt-get) ]]; then
+        sudo apt-get upgrade -y
+    elif [[ $(command -v yum) ]]; then
+        sudo yum update -y
+    fi
 
-command -v brew > /dev/null 2>&1
-if [ $? -eq 0 ]; then
-  echo "Homebrew already installed"
-else
-  install_homebrew
-fi
+    _logger "[+] Upgrading Python pip and setuptools"
+    python3 -m pip install --upgrade pip setuptools --user
 
-command -v docker > /dev/null 2>&1
-if [ $? -eq 0 ]; then
-  echo "Docker already installed"
-else
-  install_docker
-fi
+    _logger "[+] Installing latest AWS CLI"
+    # _logger "[+] Installing pipx, and latest AWS CLI"
+    # python3 -m pip install --user pipx
+    # pipx install awscli
+    python3 -m pip install --upgrade --user awscli
+}
 
-command -v aws > /dev/null 2>&1
-if [ $? -eq 0 ]; then
-  echo "AWS CLI already installed"
-else
-  install_aws_cli
-fi
+function install_utility_tools() {
+    _logger "[+] Installing jq"
+    sudo yum install -y jq
+}
 
-command -v sam > /dev/null 2>&1
-if [ $? -eq 0 ]; then
-  echo "SAM CLI already installed"
-else
-  install_sam_cli
-fi
+function install_linuxbrew() {
+    _logger "[+] Creating touch symlink"
+    sudo ln -sf /bin/touch /usr/bin/touch
+
+    if [[ $(command -v brew) == "" ]]; then
+        _logger "[+] Installing homebrew..."
+        echo | sh -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install.sh)"
+        _logger "[+] Adding homebrew in PATH"
+        test -d ~/.linuxbrew && eval $(~/.linuxbrew/bin/brew shellenv)
+        test -d /home/linuxbrew/.linuxbrew && eval $(/home/linuxbrew/.linuxbrew/bin/brew shellenv)
+        test -r ~/.bash_profile && echo "eval \$($(brew --prefix)/bin/brew shellenv)" >>~/.bash_profile
+        echo "eval \$($(brew --prefix)/bin/brew shellenv)" >>~/.profile
+    else
+        _logger "[+] Homebrew already installed..."
+    fi
+}
+
+function main() {
+    upgrade_existing_packages
+    install_linuxbrew
+    install_utility_tools
+    upgrade_sam_cli
+
+    echo -e "${RED} [!!!!!!!!!] Open up a new terminal to reflect changes ${NC}"
+    _logger "[+] Restarting Shell to reflect changes"
+    exec ${SHELL}
+}
+
+main
