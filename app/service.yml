@@ -1,10 +1,10 @@
 tools:
   exceptions:
-    - webpage: https://ca-central-1.console.aws.amazon.com/amplify/home?region=ca-central-1&code=bff48e058138af6a5fe5#/d1v2iso490jla
+    - webpage: https://ca-central-1.console.aws.amazon.com/amplify/home?region=ca-central-1#/d3fvo5w7ve6x0b
     - lambda: https://ca-central-1.console.aws.amazon.com/lambda/home?region=ca-central-1#/functions/aws-app-getAllItemsFunction-D59CGD8XDLN?tab=configuration
     - database: https://ca-central-1.console.aws.amazon.com/dynamodb/home?region=ca-central-1#tables:selected=aws-app-SampleTable-1L8N9XTLLXIRZ;tab=overview
   logging:
-    - webpage: https://ca-central-1.console.aws.amazon.com/amplify/home?region=ca-central-1&code=bff48e058138af6a5fe5#/d1v2iso490jla/settings/accesslogs
+    - webpage: https://ca-central-1.console.aws.amazon.com/amplify/home?region=ca-central-1#/d3fvo5w7ve6x0b/settings/accesslogs
     - lambda: https://ca-central-1.console.aws.amazon.com/lambda/home?region=ca-central-1#/functions/aws-app-getAllItemsFunction-D59CGD8XDLN?tab=monitoring
   ci: https://ca-central-1.console.aws.amazon.com/codesuite/codepipeline/pipelines/aws-app-cicd-PipelineC660917D-1KE18UCIKNGUS/view?region=ca-central-1
   services:
