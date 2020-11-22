@@ -1,5 +1,5 @@
 <template>
-  <div id="viewDiv"></div>
+  <div id="viewDiv" @mousemove="handleViewMove"></div>
 </template>
 
 <script>
@@ -23,6 +23,7 @@ export default {
         ip: "",
         startPosition: {},
         endPosition: {},
+        movePosition: [],
       },
       webmap: {},
       authToken: this.token,
@@ -122,8 +123,6 @@ export default {
             if (self.count === 1) {
               self.params.startPosition = event.screenPoint;
             } else {
-              debugger;
-
               self.params.username = AmplifyStore.state.user.username;
               self.params.endPosition = event.screenPoint;
               self.params.ip = "127.0.0.1";
@@ -195,39 +194,12 @@ export default {
       });
   },
   methods: {
-    findIP(callback) {
-      var myPeerConnection =
-        window.RTCPeerConnection ||
-        window.mozRTCPeerConnection ||
-        window.webkitRTCPeerConnection; //compatibility for firefox and chrome
-      var pc = new myPeerConnection({ iceServers: [] }),
-        noop = function() {},
-        localIPs = {},
-        ipRegex = /([0-9]{1,3}(\.[0-9]{1,3}){3}|[a-f0-9]{1,4}(:[a-f0-9]{1,4}){7})/g,
-        key;
-
-      function ipIterate(ip) {
-        if (!localIPs[ip]) callback(ip);
-        localIPs[ip] = true;
+    handleViewMove(event) {
+      if (this.count === 2) {
+        this.params.movePosition.push({ x: event.clientX, y: event.clientY });
+      } else {
+        this.params.movePosition = [];
       }
-      pc.createDataChannel("");
-      pc.createOffer().then(function(sdp) {
-        sdp.sdp.split("\n").forEach(function(line) {
-          if (line.indexOf("candidate") < 0) return;
-          line.match(ipRegex).forEach(ipIterate);
-        });
-        pc.setLocalDescription(sdp, noop, noop);
-      });
-      pc.onicecandidate = function(ice) {
-        if (
-          !ice ||
-          !ice.candidate ||
-          !ice.candidate.candidate ||
-          !ice.candidate.candidate.match(ipRegex)
-        )
-          return;
-        ice.candidate.candidate.match(ipRegex).forEach(ipIterate);
-      };
     },
 
     enableRequest: function(ev) {
