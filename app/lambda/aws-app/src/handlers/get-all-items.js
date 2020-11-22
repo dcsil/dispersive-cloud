@@ -25,9 +25,14 @@ exports.getAllItemsHandler = async (event) => {
 
   const response = {
     statusCode: 200,
-    body: JSON.stringify(items),
+    body: items,
     headers: {
       "Access-Control-Allow-Origin": "*",
+      "Access-Control-Allow-Credentials": true,
+      "Access-Control-Allow-Headers":
+        "Content-Type, Access-Control-Allow-Headers, Access-Control-Request-Headers, Access-Control-Request-Method, Authorization, X-Requested-With, User-Agent, Referer, Origin",
+      "Access-Control-Allow-Methods": "*",
+      "Access-Control-Max-Age": 1728000,
     },
   };
 
