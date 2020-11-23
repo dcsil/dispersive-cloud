@@ -11,5 +11,10 @@
     },
     "scripts": {
         "test": "jest"
+    },
+    "jest":{
+        "collectCoverage":true,
+        "collectCoverageFrom":["**/*.test.js","!**/node_modules/**"],
+        "coverageReporters":["html"]
     }
 }
