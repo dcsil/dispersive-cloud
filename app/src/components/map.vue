@@ -1,11 +1,12 @@
 <template>
-  <div id="viewDiv"></div>
+  <div id="viewDiv" @mousemove="handleViewMove"></div>
 </template>
 
 <script>
 import { loadModules } from "esri-loader";
 import { loadCss } from "esri-loader";
 import axios from "axios";
+axios.defaults.withCredentials = false;
 import AmplifyStore from "../store/store";
 var config = require("../config.js");
 
@@ -16,6 +17,14 @@ export default {
   },
   data() {
     return {
+      count: 1,
+      params: {
+        username: "",
+        ip: "",
+        startPosition: {},
+        endPosition: {},
+        movePosition: [],
+      },
       webmap: {},
       authToken: this.token,
     };
@@ -111,6 +120,27 @@ export default {
           );
 
           view.on("click", function handleViewClick(event) {
+            if (self.count === 1) {
+              self.params.startPosition = event.screenPoint;
+            } else {
+              self.params.username = AmplifyStore.state.user.username;
+              self.params.endPosition = event.screenPoint;
+              self.params.ip = "127.0.0.1";
+              axios({
+                method: "POST",
+                url: config.api.invokeUrl + "/setdata",
+                headers: {
+                  Accept: "*/*",
+                  "content-type": "application/json; charset=UTF-8",
+                  Authorization: self.token,
+                },
+                data: self.params,
+                contentType: "application/json",
+              }).then((data) => {
+                self.count = 1;
+              });
+            }
+            self.count++;
             self.webmap.selectedPoint = event.mapPoint;
             view.graphics.remove(pinGraphic);
             pinGraphic = new Graphic({
@@ -164,20 +194,29 @@ export default {
       });
   },
   methods: {
-    enableRequest: function (ev) {
+    handleViewMove(event) {
+      if (this.count === 2) {
+        this.params.movePosition.push({ x: event.clientX, y: event.clientY });
+      } else {
+        this.params.movePosition = [];
+      }
+    },
+
+    enableRequest: function(ev) {
       this.$parent.enableButton(ev);
     },
-    go: function (event) {
+    go: function(event) {
       this.webmap = event;
       this.requestUnicorn(this.webmap.selectedPoint);
     },
-    requestUnicorn: function (pickupLocation) {
+    requestUnicorn: function(pickupLocation) {
       self = this;
       axios({
         method: "POST",
         url: config.api.invokeUrl + "/setdata",
         headers: {
           Accept: "*/*",
+          "content-type": "application/json; charset=UTF-8",
           Authorization: self.token,
         },
         data: JSON.stringify({
@@ -189,20 +228,20 @@ export default {
         }),
         contentType: "application/json",
       })
-        .then(function (response) {
+        .then(function(response) {
           // handle success
           if (response.status === 200) {
             const data = JSON.parse(response.data.body);
             self.completeRequest(data);
           }
         })
-        .catch(function (error) {
+        .catch(function(error) {
           // handle error
           console.error("Error requesting ride: ", error);
           alert("An error occured when requesting your unicorn:\n" + error);
         });
     },
-    completeRequest: function (unicornResponse) {
+    completeRequest: function(unicornResponse) {
       console.log("Response received from API: ", unicornResponse);
       var unicorn;
       var pronoun;
@@ -221,11 +260,11 @@ export default {
         //self.webmap.unsetLocation();
       });
     },
-    displayUpdate: function (text) {
+    displayUpdate: function(text) {
       this.$parent.addItem(text);
       console.log(text);
     },
-    animateArrival: function (callback) {
+    animateArrival: function(callback) {
       var dest = this.webmap.selectedPoint;
       var origin = {};
       if (dest.latitude > this.webmap.center.latitude) {
