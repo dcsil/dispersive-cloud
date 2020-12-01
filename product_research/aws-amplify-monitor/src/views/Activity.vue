@@ -78,13 +78,13 @@ export default {
     const chartData = filter.error;
     chartData.map((el) => {
       this.chartOption1.xAxis.data.push(el.createTime);
-      this.chartOption1.series[0].data.push(el.Direction);
+      this.chartOption1.series[0].data.push(el.Direction.toFixed(2));
       this.chartOption2.xAxis.data.push(el.createTime);
-      this.chartOption2.series[0].data.push(el.Angle_of_Curvature);
+      this.chartOption2.series[0].data.push(el.Angle_of_Curvature.toFixed(2));
       this.chartOption3.xAxis.data.push(el.createTime);
-      this.chartOption3.series[0].data.push(el.Curvature_Distance);
+      this.chartOption3.series[0].data.push(el.Curvature_Distance.toFixed(2));
     });
-  }, 
+  },
 
   methods: {
     siderMenuHandler(item) {
@@ -107,13 +107,13 @@ export default {
         this.chartText = ["Direction", "Angle of Curvature", "Curvature Distance"];
       } else if (this.siderActive[0] === "2") {
         this.chartText = [this.siderMenu.find((el) => el.key === this.siderActive[0]).value];
-        this.charts = [{ options: this.visitorOption1 }];
+        this.charts = [{ options: this.chartOption1 }];
       } else if (this.siderActive[0] === "3") {
         this.chartText = [this.siderMenu.find((el) => el.key === this.siderActive[0]).value];
-        this.charts = [{ options: this.visitorOption2 }];
+        this.charts = [{ options: this.chartOption2 }];
       } else {
         this.chartText = [this.siderMenu.find((el) => el.key === this.siderActive[0]).value];
-        this.charts = [{ options: this.visitorOption3 }];
+        this.charts = [{ options: this.chartOption3 }];
       }
     },
   },
@@ -145,7 +145,7 @@ export default {
   margin-left: 20px;
 }
 .echarts {
-  width: 30%;
+  flex: 1;
   height: 400px;
   margin-left: 3%;
   margin-top: 36px;

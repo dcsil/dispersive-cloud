@@ -13,8 +13,9 @@ Vue.use(AmplifyPlugin, AmplifyModules);
 let user;
 
 getUser().then((user, error) => {
+
   if (user) {
-    //router.push({path: '/profile'})
+    router.push({path: '/monitor'})
   }
 })
 
@@ -76,6 +77,12 @@ const router = new Router({
           name: 'activity',
           meta: { requiresAuth: true},
            component: () => import(/* webpackChunkName: "ride" */ './views/Activity.vue'),
+        },
+        {
+          path:'reports',
+          name: 'reports',
+          meta: { requiresAuth: true},
+           component: () => import(/* webpackChunkName: "ride" */ './views/Reports.vue'),
         }
       ]
     },
