@@ -15,6 +15,8 @@ import "echarts/lib/component/tooltip";
 import "echarts/lib/component/markPoint";
 import "echarts/lib/component/markLine";
 import "echarts/lib/component/graphic";
+import JsonExcel from 'vue-json-excel'
+Vue.component('downloadExcel', JsonExcel)
 Vue.use(Antd);
 
 Amplify.configure(awsconfig)

@@ -17,6 +17,14 @@
         }"
       >
         <div class="content">
+        
+          <download-excel
+                class = "export-excel-wrapper"
+                :data = "platForms"
+                :fields = "json_fields"
+                name = "Reports.xls">
+                <a-button type="primary" size="small">Export</a-button>
+          </download-excel>
           <a-card class="card" v-for="item in platForms" :key="item.name" :title="item.name">
             <p>
               # of Threat : <span class="threat">{{ item.value }}</span>
@@ -38,6 +46,10 @@ export default {
   data() {
     return {
       platForms: [],
+      json_fields:{
+        "PlatForm":"name",
+        "Threat":"value"
+      },
       siderActive: ["1"],
       charts: [],
       chartText: [],
