@@ -1,7 +1,8 @@
 <template>
   <a-layout id="components-layout-demo-top-side-2">
     <a-layout-header class="header">
-      <div class="logo" />
+      <div class="logo"></div>
+      <h6>Dispersive cloud</h6>
       <a-menu theme="dark" mode="horizontal" @click="headerMenuHandler" :selectedKeys="headeActive" :style="{ lineHeight: '64px' }">
         <a-menu-item v-for="item in headerMenu" :key="item.key">
           {{ item.value }}
@@ -35,7 +36,7 @@ export default {
     };
   },
   created() {
-    this.headeActive = [this.$route.name];
+    // this.headeActive = [this.$route.name];
   },
   async mounted() {
     const session = await this.$Amplify.Auth.currentSession();
@@ -51,6 +52,10 @@ export default {
       this.authToken = Jwt;
     }
     this.getDataList();
+
+    this.$root.$on("msg", (data) => {
+      this.headeActive = [data];
+    });
   },
   methods: {
     async getDataList() {
@@ -67,6 +72,10 @@ export default {
       this.dataList = data.data.body;
       this.loadding = false;
       DataProvider.setdata(data);
+      this.$router.push({
+        path: `/monitor/dashboard`,
+        params: { id: this.dataList[0].id },
+      });
     },
     headerMenuHandler(item) {
       this.headeActive = item.keyPath;
@@ -84,11 +93,22 @@ export default {
   height: 100%;
 }
 #components-layout-demo-top-side-2 .logo {
-  width: 120px;
-  height: 31px;
-  background: rgba(255, 255, 255, 0.2);
-  margin: 16px 28px 16px 0;
+  background: url("../assets/logo.png") no-repeat 50%;
+  width: 60px;
+  height: 60px;
   float: left;
+  background-size: 60px;
+  position: relative;
+  top: 3px;
+  margin-right: 20px;
+}
+#components-layout-demo-top-side-2 h6 {
+  float: left;
+  margin: 0;
+  color: #fff;
+  margin-right: 60px;
+  font-size: 20px;
+  font-weight: bold;
 }
 .example {
   width: 100vw;

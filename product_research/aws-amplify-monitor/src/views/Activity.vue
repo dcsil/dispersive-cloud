@@ -28,10 +28,10 @@
               >Time:<span class="content-title-text">{{ target.createTime }}</span></span
             >
           </div>
-          <div class="content-chart">
-            <v-chart v-for="(item, index) in charts" :key="index" class="chart" :options="item.options" autoresize></v-chart>
+          <div class="content-chart" >
+            <v-chart :style="{width:(charts.length===1?'100%':'30%')}" v-for="(item, index) in charts" :key="index" class="chart" :options="item.options" autoresize></v-chart>
           </div>
-          <div class="content-chart">
+          <div class="content-chart" >
             <span v-for="(item, index) in chartText" :key="index">{{ item }}</span>
           </div>
         </div>
@@ -145,7 +145,7 @@ export default {
   margin-left: 20px;
 }
 .echarts {
-  flex: 1;
+  width:30%;
   height: 400px;
   margin-left: 3%;
   margin-top: 36px;

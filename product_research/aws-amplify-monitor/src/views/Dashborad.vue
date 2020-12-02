@@ -4,7 +4,7 @@
     margin-top: 60px;">
   <a-table :columns="columns" :data-source="data">
     <span slot="action" slot-scope="text, record">
-      <a>{{ record.threat }} -- Details</a>
+      <a @click="clickHandler(record)">{{ record.threat }} -- Details</a>
     </span>
   </a-table>
   </div>
@@ -51,7 +51,15 @@ export default {
       });
     });
   },
-  methods: {},
+  methods: {
+    clickHandler(item){
+      this.$root.$emit("msg",'activity')
+      this.$router.push({
+        path: `/monitor/activity`,
+        params: { id:item.username },
+      });
+    }
+  },
 };
 </script>
 
