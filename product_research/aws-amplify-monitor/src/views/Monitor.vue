@@ -3,7 +3,13 @@
     <a-layout-header class="header">
       <div class="logo"></div>
       <h6>Dispersive cloud</h6>
-      <a-menu theme="dark" mode="horizontal" @click="headerMenuHandler" :selectedKeys="headeActive" :style="{ lineHeight: '64px' }">
+      <a-menu
+        theme="dark"
+        mode="horizontal"
+        @click="headerMenuHandler"
+        :selectedKeys="headeActive"
+        :style="{ lineHeight: '64px' }"
+      >
         <a-menu-item v-for="item in headerMenu" :key="item.key">
           {{ item.value }}
         </a-menu-item>
@@ -32,6 +38,7 @@ export default {
         { key: "dashboard", value: "Dashboard" },
         { key: "activity", value: "Activity" },
         { key: "reports", value: "Reports" },
+        { key: "user", value: "User Manage" },
       ],
     };
   },
@@ -68,6 +75,9 @@ export default {
           Authorization: this.authToken,
         },
         contentType: "application/json",
+      });
+      data.data.body.map((el, index) => {
+        el["status"] = "Y";
       });
       this.dataList = data.data.body;
       this.loadding = false;

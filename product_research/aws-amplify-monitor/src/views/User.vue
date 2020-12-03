@@ -2,7 +2,8 @@
   <div style="width: 80%; margin-left: 10%; margin-top: 60px">
     <a-table :columns="columns" :data-source="data">
       <span slot="action" slot-scope="text, record">
-        <a @click="clickHandler(record)">{{ record.threat }} -- Details</a>
+        <a class="yes" @click="yesHandler(record)">yes</a>
+        <a class="no" @click="noHandler(record)">no</a>
       </span>
     </a-table>
   </div>
@@ -29,6 +30,11 @@ export default {
           dataIndex: "createTime",
           key: "createTime",
         },
+        {
+          title: "Status",
+          dataIndex: "status",
+          key: "status",
+        },
 
         {
           title: "Action",
@@ -41,25 +47,37 @@ export default {
   },
   async mounted() {
     const list = DataProvider.getdata();
-    const filters = list.filter((el) => el.status === "Y");
-    filters.map((el, index) => {
+    list.map((el, index) => {
       this.data.push({
         threat: `NO.${index + 1}`,
         username: el.username,
         createTime: el.createTime,
+        status: el.status,
       });
     });
   },
   methods: {
-    clickHandler(item) {
-      this.$root.$emit("msg", "activity");
-      this.$router.push({
-        path: `/monitor/activity`,
-        query: { id: item.username },
+    yesHandler(item) {
+      item.status = "Y";
+      const list = DataProvider.getdata();
+      list.map((el, index) => {
+        el.status = this.data[index].status;
+      });
+    },
+    noHandler(item) {
+      item.status = "N";
+       const list = DataProvider.getdata();
+      list.map((el, index) => {
+        el.status = this.data[index].status;
       });
     },
   },
 };
 </script>
 
-<style></style>
+<style>
+.no {
+  margin-left: 20px;
+  color: red;
+}
+</style>

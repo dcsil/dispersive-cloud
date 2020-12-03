@@ -1,7 +1,12 @@
 <template>
   <a-layout>
     <a-layout-sider width="200" style="background: #fff">
-      <a-menu mode="inline" @click="siderMenuHandler" :selectedKeys="siderActive" :style="{ height: '100%', borderRight: 0 }">
+      <a-menu
+        mode="inline"
+        @click="siderMenuHandler"
+        :selectedKeys="siderActive"
+        :style="{ height: '100%', borderRight: 0 }"
+      >
         <a-menu-item v-for="item in siderMenu" :key="item.key">
           {{ item.value }}
         </a-menu-item>
@@ -19,20 +24,35 @@
         <div class="content">
           <div class="content-title">
             <span
-              >Threat:<span class="content-title-text">{{ target.threat }}</span></span
+              >Threat:<span class="content-title-text">{{
+                target.threat
+              }}</span></span
             >
             <span
-              >User name:<span class="content-title-text">{{ target.username }}</span></span
+              >User name:<span class="content-title-text">{{
+                target.username
+              }}</span></span
             >
             <span
-              >Time:<span class="content-title-text">{{ target.createTime }}</span></span
+              >Time:<span class="content-title-text">{{
+                target.createTime
+              }}</span></span
             >
           </div>
-          <div class="content-chart" >
-            <v-chart :style="{width:(charts.length===1?'100%':'30%')}" v-for="(item, index) in charts" :key="index" class="chart" :options="item.options" autoresize></v-chart>
+          <div class="content-chart">
+            <v-chart
+              :style="{ width: charts.length === 1 ? '100%' : '30%' }"
+              v-for="(item, index) in charts"
+              :key="index"
+              class="chart"
+              :options="item.options"
+              autoresize
+            ></v-chart>
           </div>
-          <div class="content-chart" >
-            <span v-for="(item, index) in chartText" :key="index">{{ item }}</span>
+          <div class="content-chart">
+            <span v-for="(item, index) in chartText" :key="index">{{
+              item
+            }}</span>
           </div>
         </div>
       </a-layout-content>
@@ -65,15 +85,18 @@ export default {
     };
   },
   async mounted() {
-    let id = this.$route.params.id;
-    let list = [];
+    let id = this.$route.query.id;
+    let list = DataProvider.getdata();
     if (id == null) {
-      list = DataProvider.getdata();
       id = list[0].id;
     }
     const filter = list.find((el) => el.id === id);
     const index = list.findIndex((el) => el.id === id) + 1;
-    this.target = { threat: `NO.${index}`, username: filter.username, createTime: filter.createTime };
+    this.target = {
+      threat: `NO.${index}`,
+      username: filter.username,
+      createTime: filter.createTime,
+    };
     this.setLayout();
     const chartData = filter.error;
     chartData.map((el) => {
@@ -104,15 +127,25 @@ export default {
             options: this.chartOption3,
           },
         ];
-        this.chartText = ["Direction", "Angle of Curvature", "Curvature Distance"];
+        this.chartText = [
+          "Direction",
+          "Angle of Curvature",
+          "Curvature Distance",
+        ];
       } else if (this.siderActive[0] === "2") {
-        this.chartText = [this.siderMenu.find((el) => el.key === this.siderActive[0]).value];
+        this.chartText = [
+          this.siderMenu.find((el) => el.key === this.siderActive[0]).value,
+        ];
         this.charts = [{ options: this.chartOption1 }];
       } else if (this.siderActive[0] === "3") {
-        this.chartText = [this.siderMenu.find((el) => el.key === this.siderActive[0]).value];
+        this.chartText = [
+          this.siderMenu.find((el) => el.key === this.siderActive[0]).value,
+        ];
         this.charts = [{ options: this.chartOption2 }];
       } else {
-        this.chartText = [this.siderMenu.find((el) => el.key === this.siderActive[0]).value];
+        this.chartText = [
+          this.siderMenu.find((el) => el.key === this.siderActive[0]).value,
+        ];
         this.charts = [{ options: this.chartOption3 }];
       }
     },
@@ -145,7 +178,7 @@ export default {
   margin-left: 20px;
 }
 .echarts {
-  width:30%;
+  width: 30%;
   height: 400px;
   margin-left: 3%;
   margin-top: 36px;

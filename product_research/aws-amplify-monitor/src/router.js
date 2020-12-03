@@ -83,6 +83,12 @@ const router = new Router({
           name: 'reports',
           meta: { requiresAuth: true},
            component: () => import(/* webpackChunkName: "ride" */ './views/Reports.vue'),
+        },
+        {
+          path:'user',
+          name: 'user',
+          meta: { requiresAuth: true},
+           component: () => import(/* webpackChunkName: "ride" */ './views/User.vue'),
         }
       ]
     },
