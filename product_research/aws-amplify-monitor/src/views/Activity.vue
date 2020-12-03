@@ -99,13 +99,20 @@ export default {
     };
     this.setLayout();
     const chartData = filter.error;
-    chartData.map((el) => {
+    const chartData2 = filter.success;
+    chartData.map((el,index) => {
       this.chartOption1.xAxis.data.push(el.createTime);
       this.chartOption1.series[0].data.push(el.Direction.toFixed(2));
+      this.chartOption1.series[1].data.push(chartData2[index].Direction.toFixed(2));
+
       this.chartOption2.xAxis.data.push(el.createTime);
       this.chartOption2.series[0].data.push(el.Angle_of_Curvature.toFixed(2));
+      this.chartOption1.series[1].data.push(chartData2[index].Angle_of_Curvature.toFixed(2));
+
       this.chartOption3.xAxis.data.push(el.createTime);
       this.chartOption3.series[0].data.push(el.Curvature_Distance.toFixed(2));
+       this.chartOption1.series[1].data.push(chartData2[index].Curvature_Distance.toFixed(2));
+
     });
   },
 
