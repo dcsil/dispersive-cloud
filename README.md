@@ -4,9 +4,9 @@
 
 Dispersive Cloud is a company founded in the cloud security industry. Dispersive Cloud aims to increase detection rate for insider threats caused by account leak in the cloud environment.
 
-Those are our use cases: (./use_cases.md)
+![use cases](./use_cases.md)
 
-Those are areas under development: (./under_development_areas.md)
+![areas under development](./under_development_areas.md)
 
 Table of Contents
 ---
