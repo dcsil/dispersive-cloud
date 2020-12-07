@@ -3,10 +3,15 @@
     <mapComponent :token="authToken" />
 
     <div class="info panel panel-default">
-      <!-- <div class="panel-heading">
-            <button id="request" class="btn btn-primary" :disabled="disableInputBool" v-on:click="triggerRequest()" >{{buttonText}}</button>
-            <amplify-sign-out></amplify-sign-out>
-        </div> -->
+      <div class="panel-heading">
+        <!-- <button
+          id="request"
+          class="btn btn-primary"
+          :disabled="disableInputBool"
+          v-on:click="triggerRequest()"
+        >{{buttonText}}</button>-->
+        <amplify-sign-out></amplify-sign-out>
+      </div>
       <div class="panel-body">
         <ol id="updates">
           <li>Welcome! Click the map to set your pickup location.</li>
@@ -14,9 +19,7 @@
             You are authenticated, Click here to see your
             <a v-on:click="show()">auth token</a>
           </li>
-          <li v-for="item in items">
-            {{ item.message }}
-          </li>
+          <li v-for="item in items">{{ item.message }}</li>
         </ol>
       </div>
     </div>
@@ -42,7 +45,10 @@
         <div class="AuthMessage" v-if="authMessage === true">
           <p>
             This page is not functional yet because there is no API invoke URL
-            configured in <a href="/src/config.js">/src/config.js</a>. You'll
+            configured in
+            <a
+              href="/src/config.js"
+            >/src/config.js</a>. You'll
             configure this in Module 3.
           </p>
           <p>
@@ -53,14 +59,7 @@
         <textarea class="authToken">{{ authToken }}</textarea>
       </div>
       <div class="modal-footer">
-        <button
-          type="button"
-          v-on:click="hide()"
-          class="btn btn-default"
-          data-dismiss="modal"
-        >
-          Close
-        </button>
+        <button type="button" v-on:click="hide()" class="btn btn-default" data-dismiss="modal">Close</button>
       </div>
     </modal>
   </div>
@@ -85,13 +84,13 @@ export default {
       showModal: false,
       authMessage: false,
       disableInputBool: true,
-      buttonText: "Set Pickup",
+      buttonText: "Set Pickup"
     };
   },
   components: {
     footers: footers,
     mapComponent: mapView,
-    map: {},
+    map: {}
   },
   async mounted() {
     const session = await this.$Amplify.Auth.currentSession();
@@ -129,8 +128,8 @@ export default {
     triggerRequest() {
       this.$children[0].go(this.map);
       this.disableButton();
-    },
-  },
+    }
+  }
 };
 </script>
 
@@ -149,5 +148,8 @@ body,
   margin: 0;
   height: 100%;
   width: 100%;
+}
+.panel-heading {
+  padding-top: 50px;
 }
 </style>

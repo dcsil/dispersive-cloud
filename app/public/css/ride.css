@@ -30,7 +30,7 @@ html, body, #main, #map {
     min-width: 100px;
     color:black;
     letter-spacing: 0.5px;
-    border: none;
+    border: 1px solid;
 }
 
 #request {
