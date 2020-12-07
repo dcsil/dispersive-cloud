@@ -127,7 +127,7 @@ export default {
             } else {
               self.params.username = AmplifyStore.state.user.username;
               self.params.endPosition = event.screenPoint;
-              self.params.ip = returnCitySN["cip"];
+              self.params.ip = '192.198.1.1';
               axios({
                 method: "POST",
                 url: config.api.invokeUrl + "/setdata",
