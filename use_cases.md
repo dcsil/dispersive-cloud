@@ -60,7 +60,7 @@ The recorded information will automatically compare with the distribution of pre
 [![Analysis feature](https://res.cloudinary.com/marcomontalbano/image/upload/v1607375911/video_to_markdown/images/youtube--c_DXg2vcJOo-c05b58ac6eb4c4700831b2b3070cd403.jpg)](https://youtu.be/c_DXg2vcJOo "Analysis feature")
 
 ### Script
-WWhen the tier1 security analyst login into the dashboard of the security system.
+When the tier1 security analyst login into the dashboard of the security system.
 
 The analyst can check all alerts that generate by our dynamic cloud database. 
 
