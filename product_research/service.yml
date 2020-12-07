@@ -1,9 +1,9 @@
 tools:
   exceptions:
-    webpage: https://ca-central-1.console.aws.amazon.com/amplify/home?region=ca-central-1#/d3fvo5w7ve6x0b
+    webpage: https://ca-central-1.console.aws.amazon.com/amplify/home?region=ca-central-1#/d1qygtr349aphw
     lambda: https://ca-central-1.console.aws.amazon.com/lambda/home?region=ca-central-1#/functions/aws-app-getAllItemsFunction-D59CGD8XDLN?tab=configuration
   logging:
-    webpage: https://ca-central-1.console.aws.amazon.com/amplify/home?region=ca-central-1#/d3fvo5w7ve6x0b/settings/accesslogs
+    webpage: https://ca-central-1.console.aws.amazon.com/amplify/home?region=ca-central-1#/d1qygtr349aphw/settings/accesslogs
     lambda: https://ca-central-1.console.aws.amazon.com/lambda/home?region=ca-central-1#/functions/aws-app-getAllItemsFunction-D59CGD8XDLN?tab=monitoring
   ci: https://ca-central-1.console.aws.amazon.com/codesuite/codepipeline/pipelines/aws-app-cicd-PipelineC660917D-1KE18UCIKNGUS/view?region=ca-central-1
 
@@ -17,5 +17,5 @@ docs:
 commands: 
  bootstrap: script/bootstrap
  database: https://ca-central-1.console.aws.amazon.com/dynamodb/home?region=ca-central-1#tables:selected=aws-app-SampleTable-1L8N9XTLLXIRZ;tab=overview
- server: npm start
+ server: npm run serve
  test: npm run test
