@@ -34,3 +34,20 @@ jobs:
         run: |
           echo Add other actions to build,
           echo test, and deploy your project.
+
+  coverage:
+    name: coverage
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@master
+    - uses: actions/setup-node@master
+      with:
+        node-version: '12'
+    - run: cd app/lambda/aws-app
+    - run: npm install -g yarn
+    - run: yarn build
+    - uses: paambaati/codeclimate-action@v2.5.7
+      env:
+        CC_TEST_REPORTER_ID: df50324a2fd30f9dd12b8a747eb45f6be43ab1c88b348a6b1f683d7252fafd18
+      with:
+        coverageCommand: yarn coverage
