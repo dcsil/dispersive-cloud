@@ -15,10 +15,5 @@
     "scripts": {
         "test": "jest",
         "coverage": "nyc --reporter lcov npm run test"
-    },
-    "jest": {
-        "coverageReporters": [
-            "html"
-        ]
     }
 }
