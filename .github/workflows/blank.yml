@@ -38,13 +38,14 @@ jobs:
   coverage:
     name: coverage
     runs-on: ubuntu-latest
+    
     steps:
     - uses: actions/checkout@master
     - uses: actions/setup-node@master
       with:
-        node-version: '12'
-    - run: cd app/lambda/aws-app
+        node-version: '14.x'
     - run: npm install -g yarn
+      working-directory: ./app/lambda/aws-app
     - uses: paambaati/codeclimate-action@v2.5.7
       env:
         CC_TEST_REPORTER_ID: df50324a2fd30f9dd12b8a747eb45f6be43ab1c88b348a6b1f683d7252fafd18
