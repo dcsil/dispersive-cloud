@@ -15,7 +15,7 @@ docs:
   getting_started: ./README.md
       
 commands: 
- bootstrap: script/bootstrap
+ bootstrap: app/bootstrap.sh
  database: https://ca-central-1.console.aws.amazon.com/dynamodb/home?region=ca-central-1#tables:selected=aws-app-SampleTable-1L8N9XTLLXIRZ;tab=overview
  server: npm run serve
  test: npm run test
