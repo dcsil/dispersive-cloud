@@ -11,7 +11,7 @@
     "cdk": "cdk"
   },
   "devDependencies": {
-    "@aws-cdk/assert": "1.72.0",
+    "@aws-cdk/assert": "1.199.0",
     "@types/jest": "^26.0.10",
     "@types/node": "10.17.27",
     "jest": "^26.4.2",
@@ -21,11 +21,11 @@
     "typescript": "~3.9.7"
   },
   "dependencies": {
-    "@aws-cdk/aws-codebuild": "^1.74.0",
-    "@aws-cdk/aws-codecommit": "^1.74.0",
-    "@aws-cdk/aws-codedeploy": "^1.74.0",
-    "@aws-cdk/aws-codepipeline-actions": "^1.74.0",
-    "@aws-cdk/aws-s3": "^1.74.0",
+    "@aws-cdk/aws-codebuild": "^1.199.0",
+    "@aws-cdk/aws-codecommit": "^1.199.0",
+    "@aws-cdk/aws-codedeploy": "^1.199.0",
+    "@aws-cdk/aws-codepipeline-actions": "^1.199.0",
+    "@aws-cdk/aws-s3": "^1.199.0",
     "@aws-cdk/core": "1.72.0",
     "source-map-support": "^0.5.16"
   }
